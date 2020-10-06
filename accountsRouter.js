@@ -23,10 +23,10 @@ router.get('/',(req, res) => {
 router.get("/:id", (req, res) => {
     db("accounts")
       .where('id', '=', req.params.id)
-      .then((account) => {
+      .then(account => {
             res.status(200).json({ data: account });
         })
-        .catch((err) => {
+        .catch((error) => {
             res.status(500).json({error: error.message});
         });
   });
@@ -34,10 +34,10 @@ router.get("/:id", (req, res) => {
 router.post("/", checkPost, (req, res) => {
     db("accounts")
         .insert(req.body)
-        .then((account) => {
+        .then(account => {
             res.status(201).json({ data: account });
         })
-        .catch((err) => {
+        .catch((error) => {
             res.status(500).json({ error: err.message });
         });
 });
@@ -47,11 +47,11 @@ router.delete("/:id", (req, res) => {
         .delete()
         .where({ 
             id: req.params.id })
-        .then((account) => {
+        .then(account => {
             res.status(200).json(account);
         })
-        .catch((err) => {
-            res.status(500).json({ error: err.message });
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
         });
 });
 
@@ -61,9 +61,9 @@ router.put("/:id", checkPost, (req, res) => {
             id: req.params.id })
         .update(req.body)
         .then(account => {
-            res.status(201).json({ Data: account })
-        .catch((err) => {
-            res.status(500).json({ error: err.message });
+            res.status(201).json({ data: account })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
         }); 
     });
 });
